@@ -1,0 +1,42 @@
+---
+# Install and run the Footprints Rails application
+
+- name: Check out source from GitHub
+  git:
+    repo: 'https://github.com/mongeeses/footprints-public.git'
+    dest: /var/www/html/footprints-public
+
+- name: Create group for running Footprints
+  group:
+    name: footprints
+    state: present
+
+- name: Create user for running Footprints
+  user:
+    name: footprints
+    groups: rvm,footprints
+
+- name: Give file permissions to the footprints source to the group "footprints"
+  file: dest=/var/www/html/footprints-public owner=footprints group=footprints recurse=yes
+
+- name: Copy example config for mailer
+  command: cp config/mailer.yml.example config/mailer.yml
+  args:
+    chdir: /var/www/html/footprints-public
+
+- name: Copy example config for database
+  command: cp config/database.yml.example config/database.yml
+  args:
+    chdir: /var/www/html/footprints-public
+
+- name: Install dependencies via Bundler
+  command: bundle install
+  args:
+    chdir: /var/www/html/footprints-public
+
+- name: Run Rails development server
+  command: bin/rails s -d
+  args:
+    chdir: /var/www/html/footprints-public
+  become: yes
+  become_user: footprints

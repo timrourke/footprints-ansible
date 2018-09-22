@@ -1,0 +1,24 @@
+---
+# Install RVM and Ruby
+
+# - name: Check if Ruby already installed
+#   command: which ruby
+#   register: ruby_installed
+#   ignore_errors: True
+
+# - name: Install RVM GPG keys
+#   command: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+#   when: ruby_installed is failed
+
+# - name: Install RVM with Ruby v2.1.5
+#   shell: \curl -sSL https://get.rvm.io | sudo bash -s stable --ruby=2.1.5
+#   when: ruby_installed is failed
+# - name: Configure servers with ruby support for single user
+#   hosts: all
+
+#   roles:
+#     - { role: rvm_io.ruby,
+#         tags: ruby,
+#         rvm1_rubies: ['ruby-2.1.5'],
+#         rvm1_user: 'footprints'
+#       }

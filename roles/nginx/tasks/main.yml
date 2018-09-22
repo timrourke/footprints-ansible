@@ -1,0 +1,14 @@
+---
+# Install nginx
+
+- name: Install nginx
+  apt: name=nginx state=present
+
+- name: Remove the default nginx site configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Add the footprints nginx configuration
+  template: src=mongoose-footprints.j2 dest=/etc/nginx/sites-enabled/mongoose-footprints
+  notify: restart nginx

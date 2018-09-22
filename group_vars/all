@@ -1,0 +1,5 @@
+---
+# Variables for interpolating into templates and dynamic configuration go here.
+
+# This needs to resolve to a different value in production.
+footprints_host: footprints.localdev
